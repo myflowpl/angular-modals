@@ -3,10 +3,9 @@ Simple manager for angular-ui-bootstrap modals.
 Create and register your modals and later easily open them with $modals service or modal dreictive
 
 ## Idea
-The main idea behind the manager is to treat the modals as async services.  
-So lets compare it to $http service
+The main idea behind the manager is to treat the modals as async services, similar to $http service
 
-if you want to get user profile form server, probably you are going to use $http
+if you want to get user profile form server, you probably do:
 ```javascript
 $http.get('/user/prifle', {profile_id: 1}).then(function(profile){
     // handle success
@@ -15,8 +14,7 @@ $http.get('/user/prifle', {profile_id: 1}).then(function(profile){
 });
 ```
 Why not treat the modals the same way.  
-Lets say you want to edit the profile inside the modal.  
-The operation should be as simple as:
+Lets say you want to edit the profile using modal, it should be as simple as:
 ```javascript
 $modals.open('user-edit', {profile_id: 1}).then(function(profile){
     // handle success
@@ -26,7 +24,7 @@ $modals.open('user-edit', {profile_id: 1}).then(function(profile){
 ```
 ## Instalation
 
-you have to install: angular, angular-ui-bootstrap and angular-modals of course
+you have to include angular, angular-ui-bootstrap and angular-modals on your page
 
 ## Use your modals
 After you register your modals you can use: 
@@ -56,6 +54,27 @@ more advanced example, open 'user-edit' modal and pass some params to it, then l
 
 ## Create and register your modals
 
+Register your modals in factory function.
+Factory will recive two arguments, params and config passed to $modals.open() function.
+It should return configuration object for bootstrap modal.
+
+```javascript
+angular.module('app', ['angularModals'])
+
+    .config(function($modalsProvider){
+        $modalsProvider.register('user-edit', function(params, config){
+            return {
+                template: 'your modal template html',
+                controller: function($scope){// your controller code},
+                windowClass: 'user-edit-modal',
+                size: 'lg',
+                resolve: {}
+            };
+        });
+    })
+```
+
+## Example
 Best practice is to separate your modal to 3 files, script, template, styles and put them in the same directory
 
 /user-edit-modal.js  
