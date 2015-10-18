@@ -1,0 +1,26 @@
+{
+  "name": "angular-modals",
+  "version": "0.0.1",
+  "description": "Modal manager for Angular UI Bootstrap modals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myflowpl/angular-modals.git"
+  },
+  "keywords": [
+    "angular",
+    "modal",
+    "manager",
+    "bootstrap",
+    "angular-ui-bootstrap"
+  ],
+  "author": "Piotr Błaszczak",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/myflowpl/angular-modals/issues"
+  },
+  "homepage": "https://github.com/myflowpl/angular-modals#readme"
+}
