@@ -12,15 +12,15 @@ $http.get('/user/prifle', {profile_id: 1}).then(function(profile){
 }, function(error){
     // handle error
 });
-```ruby
+```
 why not treat the modals the same way, lets say you want to edit the profile inside the modal, so the operation should be as simple as:  
-
-    $modals.open('user-edit', {profile_id: 1}).then(function(profile){
-        // handle success
-    }, function(error){
-        // handle error
-    });
-
+```javascript
+$modals.open('user-edit', {profile_id: 1}).then(function(profile){
+    // handle success
+}, function(error){
+    // handle error
+});
+```
 ## Instalation
 
 you have to install: angular, angular-ui-bootstrap and angular-modals of course
