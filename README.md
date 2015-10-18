@@ -25,6 +25,32 @@ $modals.open('user-edit', {profile_id: 1}).then(function(profile){
 
 you have to install: angular, angular-ui-bootstrap and angular-modals of course
 
+## Use your modals
+After you register your modals you can use: 
+### service
+```javascript
+$modals.open('user-edit', {profile_id: 1}).then(function(profile){
+    // handle success
+}, function(error){
+    // handle error
+});
+```
+### directive
+just show simple modal, it will simply open and show some info, no params, no configs, no callbacks 
+```html
+<button modal="how-to-edit-user">need help?</button>
+```
+more advanced example, open 'user-edit' modal and pass some params to it, then listen for the close or dismiss events
+```html
+<button
+    modal="user-edit"
+    modal-config="{size:'xl'}"
+    modal-params="{profile_id: user.profile_id}"
+    modal-on-success="onUserEditSuccess($data)"
+    modal-on-error="onUserEditCancel($data)"
+>Edit</button>
+```
+
 ## Register your modals
 
 Best practice is to separate your modal to 3 files, script, template, styles and put them in the same directory
@@ -108,29 +134,4 @@ styles (sass example)
         // styles for the body
     }
 }
-```
-## Use your modals
-
-### service
-```javascript
-$modals.open('user-edit', {profile_id: 1}).then(function(profile){
-    // handle success
-}, function(error){
-    // handle error
-});
-```
-### directive
-just show simple modal, it simply will open and show some info, no params, no configs, no callbacks 
-```html
-<button modal="how-to-edit-user">need help?</button>
-```
-more advanced example, open 'user-edit' modal and pass some params to it, then listen for the close or dismiss events
-```html
-<button
-    modal="user-edit"
-    modal-config="{size:'xl'}"
-    modal-params="{profile_id: user.profile_id}"
-    modal-on-success="onUserEditSuccess($data)"
-    modal-on-error="onUserEditCancel($data)"
->Edit</button>
 ```
