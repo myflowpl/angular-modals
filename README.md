@@ -3,7 +3,8 @@ Simple manager for angular-ui-bootstrap modals.
 Create and register your modals and later easily open them with $modals service or modal dreictive
 
 ## Idea
-The main idea behind the manager is to treat the modals as async services, so best is to compare it to $http
+The main idea behind the manager is to treat the modals as async services.  
+So lets compare it to $http service
 
 if you want to get user profile form server, probably you are going to use $http
 ```javascript
@@ -13,7 +14,9 @@ $http.get('/user/prifle', {profile_id: 1}).then(function(profile){
     // handle error
 });
 ```
-why not treat the modals the same way, lets say you want to edit the profile inside the modal, so the operation should be as simple as:  
+Why not treat the modals the same way.  
+Lets say you want to edit the profile inside the modal.  
+The operation should be as simple as:
 ```javascript
 $modals.open('user-edit', {profile_id: 1}).then(function(profile){
     // handle success
