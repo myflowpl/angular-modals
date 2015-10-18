@@ -31,106 +31,106 @@ Best practice is to separate your modal to 3 files, script, template, styles and
 
 /user-edit-modal.js  
 modal configuration and controller code
+```javascript
+angular.module('app', ['angularModals'])
 
-    angular.module('app', ['angularModals'])
-    
-        .config(function($modalsProvider){
-            $modalsProvider.register('user-edit', function(params, config){
-                return {
-                    templateUrl: 'user-edit-modal.html',
-                    controller: 'UserEditModal',
-                    windowClass: 'user-edit-modal',
-                    size: 'lg',
-                    resolve: {
-                        // you can add some extra resolves here
-                    }
-                };
-            });
-        })
-    
-        .controller('UserEditModal', function ($scope, $modalInstance, params, $http) {
-        
-            $scope.params = params; // params will be always available 
-            
-            var profileId = params.profile_id; // this are the parameters you pass when you open the modal
-    
-            // you probably want to load the profile here and allow the user to edit it and save
-            $http.get('/user/profile', {profile_id: profileId}).then(function(profile){
-                $scope.profile = profile
-            }, function(response){
-               // handle the profile loading error 
-            })
-    
-            // save method
-            $scope.ok = function () {
-                $http.post('/user/profile-save', $scope.profile).then(function(profile){
-                
-                    // profile was successfully edited, close the modal and resolve the modal promise with new profile object
-                    $modalInstance.close(profile);
-                    
-                }, function(response){
-                   // handle the profile save error 
-                })
-                
+    .config(function($modalsProvider){
+        $modalsProvider.register('user-edit', function(params, config){
+            return {
+                templateUrl: 'user-edit-modal.html',
+                controller: 'UserEditModal',
+                windowClass: 'user-edit-modal',
+                size: 'lg',
+                resolve: {
+                    // you can add some extra resolves here
+                }
             };
-    
-            $scope.cancel = function () {
-                $modalInstance.dismiss({message: 'close'});
-            };
-    
         });
+    })
 
+    .controller('UserEditModal', function ($scope, $modalInstance, params, $http) {
+    
+        $scope.params = params; // params will be always available 
+        
+        var profileId = params.profile_id; // this are the parameters you pass when you open the modal
+
+        // you probably want to load the profile here and allow the user to edit it and save
+        $http.get('/user/profile', {profile_id: profileId}).then(function(profile){
+            $scope.profile = profile
+        }, function(response){
+           // handle the profile loading error 
+        })
+
+        // save method
+        $scope.ok = function () {
+            $http.post('/user/profile-save', $scope.profile).then(function(profile){
+            
+                // profile was successfully edited, close the modal and resolve the modal promise with new profile object
+                $modalInstance.close(profile);
+                
+            }, function(response){
+               // handle the profile save error 
+            })
+            
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss({message: 'close'});
+        };
+
+    });
+```
 /user-edit-modal.html          
 template html
-
-    <div class="user-edit-modal-body">
-        <div class="modal-header">
-            <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;    </button>
-            <h3 class="modal-title">Edit user profile</h3>
-        </div>
-        <div class="modal-body">
-    
-            <p>... put hour user edit form here.... </p>
-    
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
+```html
+<div class="user-edit-modal-body">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;    </button>
+        <h3 class="modal-title">Edit user profile</h3>
     </div>
-    
+    <div class="modal-body">
+
+        <p>... put hour user edit form here.... </p>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+```
 /user-edti-modal.scss
 styles (sass example)
-
-    .user-edit-modal {
-        // styles of all modal
-        .user-edit-modal-body {
-            // styles for the body
-        }
+```sass
+.user-edit-modal {
+    // styles of all modal
+    .user-edit-modal-body {
+        // styles for the body
     }
-
+}
+```
 ## Use your modals
 
 ### service
-
-    $modals.open('user-edit', {profile_id: 1}).then(function(profile){
-        // handle success
-    }, function(error){
-        // handle error
-    });
-    
+```javascript
+$modals.open('user-edit', {profile_id: 1}).then(function(profile){
+    // handle success
+}, function(error){
+    // handle error
+});
+```
 ### directive
 just show simple modal, it simply will open and show some info, no params, no configs, no callbacks 
-
-     <button modal="how-to-edit-user">need help?</button>
-
+```html
+<button modal="how-to-edit-user">need help?</button>
+```
 more advanced example, open 'user-edit' modal and pass some params to it, then listen for the close or dismiss events
-
-    <button
-         modal="user-edit"
-         modal-config="{size:'xl'}"
-         modal-params="{profile_id: user.profile_id}"
-         modal-on-success="onUserEditSuccess($data)"
-         modal-on-error="onUserEditCancel($data)"
-     >Edit</button>
-
+```html
+<button
+    modal="user-edit"
+    modal-config="{size:'xl'}"
+    modal-params="{profile_id: user.profile_id}"
+    modal-on-success="onUserEditSuccess($data)"
+    modal-on-error="onUserEditCancel($data)"
+>Edit</button>
+```
