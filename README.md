@@ -6,12 +6,20 @@ Create and register your modals and later easily open them with $modals service 
 The main idea behind the manager is to treat the modals as async services, so best is to compare it to $http
 
 if you want to get user profile form server, probably you are going to use $http
-
-    $http.get('/user/prifle', {profile_id: 1}).then(function(profile){}, function(error){});
-
+```javascript
+$http.get('/user/prifle', {profile_id: 1}).then(function(profile){
+    // handle success
+}, function(error){
+    // handle error
+});
+```ruby
 why not treat the modals the same way, lets say you want to edit the profile inside the modal, so the operation should be as simple as:  
 
-    $modals.open('user-edit', {profile_id: 1}).then(function(profile){}, function(error){});
+    $modals.open('user-edit', {profile_id: 1}).then(function(profile){
+        // handle success
+    }, function(error){
+        // handle error
+    });
 
 ## Instalation
 
@@ -105,7 +113,11 @@ styles (sass example)
 
 ### service
 
-    $modals.open('user-edit', {profile_id: 1}).then(function(profile){}, function(error){});
+    $modals.open('user-edit', {profile_id: 1}).then(function(profile){
+        // handle success
+    }, function(error){
+        // handle error
+    });
     
 ### directive
 just show simple modal, it simply will open and show some info, no params, no configs, no callbacks 
