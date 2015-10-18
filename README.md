@@ -51,7 +51,7 @@ more advanced example, open 'user-edit' modal and pass some params to it, then l
 >Edit</button>
 ```
 
-## Register your modals
+## Create and register your modals
 
 Best practice is to separate your modal to 3 files, script, template, styles and put them in the same directory
 
